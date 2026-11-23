@@ -134,6 +134,14 @@
       color: var(--muted);
     }
 
+    .info .url {
+      font-size: .8rem;
+      opacity: .75;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .arrow {
       color: var(--muted);
       opacity: .5;
@@ -197,22 +205,22 @@
         icon: "plex",
       },
       {
-        name: "Seer",
+        name: "Seerr",
         desc: "Request Movies & TV Shows",
-        url: "https://seer.kniffin.us",
+        url: "http://media.kniffin.us:5055",
         icon: "seerr",
       },
       {
         name: "Audiobookshelf",
         desc: "Audiobooks",
-        url: "https://media.kniffin.us:8282/",
+        url: "https://media.kniffin.us:8282",
         icon: "audiobookshelf",
       },
       {
-        name: "Books",
+        name: "Calibre",
         desc: "eBooks",
-        url: "https://books.kniffin.us",
-        icon: "calibre-web",
+        url: "http://media.kniffin.us:6271",
+        icon: "calibre",
       },
       {
         name: "Zoho",
@@ -222,9 +230,21 @@
       },
       {
         name: "FoundryVTT",
-        desc: "RPG",
+        desc: "RPG Virtual Tabletop",
         url: "https://rpg.kniffin.us:30000",
         icon: "foundry-vtt",
+      },
+      {
+        name: "Mealie",
+        desc: "Meal plans & recipes",
+        url: "https://mealie.kniffin.synology.me:9924/",
+        icon: "mealie",
+      },
+      {
+        name: "Noodle Gallery",
+        desc: "Photos & videos",
+        url: "http://media.kniffin.us:2283",
+        icon: "immich",
       },
     ]
 
@@ -255,6 +275,8 @@
       return `<img src="${ICON_CDN}/svg/${icon}.svg" data-png="${ICON_CDN}/png/${icon}.png" alt="" loading="lazy" onerror="iconError(this)">`
     }
 
+    const displayUrl = url => url.replace(/^https?:\/\//, "").replace(/\/$/, "")
+
     document.getElementById("sites").innerHTML = sites.map(s => `
       <li>
         <a class="card" href="${s.url}">
@@ -262,6 +284,7 @@
           <span class="info">
             <h2>${s.name}</h2>
             <p>${s.desc}</p>
+            <p class="url">${displayUrl(s.url)}</p>
           </span>
           <span class="arrow">${svg('<polyline points="9 18 15 12 9 6"/>')}</span>
         </a>
